@@ -746,6 +746,19 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"name": "withDraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -1110,11 +1123,11 @@
 			]
 		},
 		"contracts/Web3Builder.sol": {
-			"keccak256": "0x02c5cb8ec73895aa21066bdf618b323353b3eda3f7ea44b88df1e4ef7e513813",
+			"keccak256": "0xd7f98c1653d41dbff92eb49b9cc167dc52a54ab30fc2a9e65b3bca71e4461aa8",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://19c286098eed28b519c9f3a80d04e10f5883541265732c0ed504309030a9768c",
-				"dweb:/ipfs/QmPSU2vgXcAjvjtv34sp2H2Zw1xH6FL7fPauKu7YtaovHs"
+				"bzz-raw://a1bce3a3c1488143c2967ef4b8d9f71d24ccc73cbe8df5247e65ebb0631a3b8d",
+				"dweb:/ipfs/QmaDmZD4unLg16i7iZWSG9Jcq9YL5HiZryGbomV6pVDPZV"
 			]
 		}
 	},

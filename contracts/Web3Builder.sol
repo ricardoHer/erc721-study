@@ -50,24 +50,17 @@ contract Web3Builders is ERC721, ERC721Enumerable, ERC721Pausable, Ownable {
     // Add publicMint and allowListMintOpen Variables 
     function allowListMint() public payable {
         require(msg.value == 0.0001 ether, "Not enough funds");
-        require(totalSupply() < maxSupply, "We sold out!");
         require(allowList[msg.sender], "You're no in the allow list");
         require(allowLisMintOpen, "Allowlist mint closed");
-        uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
-        _safeMint(msg.sender, tokenId);
-
+        internalMint();
     } 
 
     // Add Payment
     // Add limit of supply
     function publicMint() public payable {
-        require(msg.value == 0.001 ether, "Not enough funds");
-        require(totalSupply() < maxSupply, "We sold out!");
         require(publicMintOpen, "Public mint closed");
-        uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
-        _safeMint(msg.sender, tokenId);
+        require(msg.value == 0.001 ether, "Not enough funds");
+        internalMint();
     }
 
     function setAllowList(address[] calldata addresses) external onlyOwner {
@@ -77,9 +70,21 @@ contract Web3Builders is ERC721, ERC721Enumerable, ERC721Pausable, Ownable {
         }
     }
 
+    function internalMint() internal {
+        require(totalSupply() < maxSupply, "We sold out!");
+        uint256 tokenId = _tokenIdCounter.current();
+        _tokenIdCounter.increment();
+        _safeMint(msg.sender, tokenId);
+    }
+
+    function withDraw(address _addr) external onlyOwner {
+        // getting the balance of the contract
+        uint256 balance = address(this).balance;
+        payable(_addr).transfer(balance);
+    }
+
 
     // The following functions are overrides required by Solidity.
-
     function _update(address to, uint256 tokenId, address auth)
         internal
         override(ERC721, ERC721Enumerable, ERC721Pausable)
